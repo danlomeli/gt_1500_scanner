@@ -1,0 +1,92 @@
+[tool.poetry]
+name = "ai-rag-project"
+version = "0.1.0"
+description = "AI RAG Project"
+authors = ["Daniel Lomeli <daniel@farpointcommunications.com>"]
+
+# ^1.2.3 is equivalent to >=1.2.3, <2.0.0
+# ^1.2 is equivalent to >=1.2.0, <2.0.0
+# ^1 is equivalent to >=1.0.0, <2.0.0
+
+# requests = ">=2.20.0,<3.0"
+# numpy = "^1.18.0"
+# django = "~3.1.0"
+
+# requests package should have a version greater than or equal to 2.20.0 but less than 3.0.
+# numpy package should have a version greater than or equal to 1.18.0 but less than 2.0.0.
+# django package should have a version greater than or equal to 3.1.0 but less than 3.2.0.
+
+[[tool.poetry.source]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cpu"
+priority = "supplemental"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pillow = "^10.4.0"
+pytesseract = "^0.3.10"
+reportlab = "^4.2.2"
+tesseract-ocr = "^0.0.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^8.1.1"
+black = "^24.3.0"
+jupyter-black = "^0.3.4"
+flake8 = "^6.1.0"
+isort = "^5.13.2"
+mypy = "^1.9.0"
+pre-commit = "^3.7.0"
+
+[tool.isort]
+profile = "black"
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+include = '\.pyi?$'
+exclude = '''
+/>
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.conda
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.poetry.scripts]
+my-tool = "src.cli:main"
+
+[tool.mypy]
+python_version = "3.9"
+check_untyped_defs = true
+disallow_any_generics = true
+ignore_missing_imports = true
+no_implicit_optional = true
+show_error_codes = true
+strict_equality = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
+warn_unused_configs = true
+no_implicit_reexport = true
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pyright]
+pythonVersion = "3.9"
+typeCheckingMode = "strict"
+include = ["src"]
+exclude = ["tests"]
